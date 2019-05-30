@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        final DatabaseReference myRef = database.getReference("message");
 
         myRef.setValue("Hello, World!");
         mUsername = ANONYMOUS;
@@ -97,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
-                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, null);
 
+                FriendlyMessage friendlyMessage = new FriendlyMessage(mMessageEditText.getText().toString(), mUsername, null);
+                 myRef.push().setValue(friendlyMessage);
                 // Clear input box
                 mMessageEditText.setText("");
             }
